@@ -1,24 +1,26 @@
-class webSocketClient {
+import * as WebSocket from 'ws';
+
+class WebSocketClient {
     private socket: WebSocket;
-  
+
     constructor(url: string) {
         this.socket = new WebSocket(url);
-  
-        this.socket.onopen = (event) => {
+
+        this.socket.on('open', () => {
             console.log('WebSocket connection opened');
-        };
-  
-        this.socket.onmessage = (event) => {
-            console.log('WebSocket message received:', event.data);
-        };
-  
-        this.socket.onclose = (event) => {
+        });
+
+        this.socket.on('message', (data: WebSocket.Data) => {
+            console.log('WebSocket message received:', data.toString());
+        });
+
+        this.socket.on('close', () => {
             console.log('WebSocket connection closed');
-        };
-        
-        this.socket.onerror = (event) => {
-            console.error('WebSocket error:', event);
-        };
+        });
+
+        this.socket.on('error', (error) => {
+            console.error('WebSocket error:', error);
+        });
     }
 
     login(data: Record<string, string>) {
@@ -27,4 +29,4 @@ class webSocketClient {
     }
 }
 
-export default webSocketClient;
+export default WebSocketClient;
