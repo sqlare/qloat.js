@@ -4,7 +4,7 @@ class client {
     private webSocketClient: webSocketClient;
 
     constructor() {
-        this.webSocketClient = new webSocketClient('ws://152.67.211.102:3001');
+        this.webSocketClient = new webSocketClient('wss://ws.qloat.com');
     }
 
     login(token: string) {
